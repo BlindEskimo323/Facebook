@@ -113,7 +113,7 @@
     <div class="modal fade" id="login" role="dialog">
       <div class="modal-dialog">
         <div class="modal-content">
-          <form class="form-horizontal" action="login.php" method="post">
+          <form class="form-horizontal" action="index.php" method="post">
             <div class="modal-header">
               <h4>Sign In or Register</h4>
             </div>
