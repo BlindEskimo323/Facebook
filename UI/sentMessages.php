@@ -1,6 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <?php
+          $server = mysql_connect("localhost","root", "password");
+          $db =  mysql_select_db("Facebook");
+?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -59,8 +63,30 @@
 	<div class="panel panel-default">
   	<!-- Default panel contents -->
   	<div class="panel-heading">Sent Messages</div>
-        <textarea class="form-control status-update" rows="3" placeholder="Message"></textarea>
 
+<div>
+<select class="form-control">
+	<?php
+          $query = mysql_query("select * from Circles");
+	  while ($row = mysql_fetch_array($query)) {
+	       echo "<option>".$row[Name]."</option>";
+	      }
+	    ?>
+</select>
+</div>
+<div>
+<select class="form-control">
+	<?php
+          $query = mysql_query("select * from CircleMembers");
+	  while ($row = mysql_fetch_array($query)) {
+	       echo "<option>".$row[UserID]."</option>";
+	      }
+	    ?>
+</select>
+</div>
+<div>	
+        <textarea class="form-control status-update" rows="3" placeholder="Message"></textarea>
+</div>
   	<!-- Table -->
  <!-- Placeholder PHP for table query 1/2    
 			<?php

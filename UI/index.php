@@ -77,7 +77,7 @@ if(!isset($_SESSION['current_user'])){
     <div class="container">
       <div class="row">
         <div class="col-md-3">
-          <h3><a href="#">Circles</a></h3>
+          <h3><a href="circles.php">Circles</a></h3>
           <p>List of Friend Circles here</p>
 
           <a href="#" class="btn btn-danger">Show All</a>
@@ -113,7 +113,7 @@ if(!isset($_SESSION['current_user'])){
 
     <div class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
-        <p class="navbar-text pull-right">Site by Daniel Beltran</p>
+        <p class="navbar-text pull-right">Site by Danielle Beltran</p>
       </div>
     </div>
 

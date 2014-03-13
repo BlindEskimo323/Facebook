@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if(!isset($_SESSION['current_user'])){
+	header("Location: signin.html");
+}
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -41,8 +47,8 @@
 	  <li class="active dropdown">
 	    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages <b class="caret"></b></a>
 	      <ul class="dropdown-menu">
-		<li><a href="messages.html">Inbox</a></li>
-		<li><a href="sentMessages.html">Sent Messages</a></li>
+		<li><a href="messages.php">Inbox</a></li>
+		<li><a href="sentMessages.php">Sent Messages</a></li>
 	      </ul>
 	  </li>
 	  <li><a href="about.html">About</a></li>
@@ -60,7 +66,12 @@
 	<?php
           $server = mysql_connect("localhost","root", "password");
           $db =  mysql_select_db("Facebook");
-          $query = mysql_query("select * from Messages");
+          $query = mysql_query("SELECT m.Content, us.Name Sender, ur.Name Reciever, m.Timestamp
+FROM Messages m
+JOIN Users us ON us.UserID = m.Sender
+JOIN Users ur ON ur.UserID = m.Reciever
+ORDER BY TIMESTAMP DESC
+");
 	?>
 <!-- -->
   	<table class="table table-striped">
