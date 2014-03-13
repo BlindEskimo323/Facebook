@@ -12,7 +12,7 @@ if(isset($_POST["login_button"])){
 		
 		if(strcmp($password, $result['Password'])==0){
 			$_SESSION['current_user'] = $username;
-			header("Location: sdfjgkls.php");
+			//header("Location: index.php");
 			die();
 		}
 		else{
