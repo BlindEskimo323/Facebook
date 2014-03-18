@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<?php
+session_start();
+if(!isset($_SESSION['current_user'])){
+	header("Location: signin.html");
+}
+?>
 <html lang="en">
   <head>
     <meta charset="utf-8">
@@ -58,16 +64,21 @@
       <!-- Table -->
 <!-- Placeholder PHP for table query 1/2    -->
 	<?php
+	  $username = $_SESSION['current_user'];
           $server = mysql_connect("localhost","root", "password");
           $db =  mysql_select_db("Facebook");
-          $query = mysql_query("select * from Circles");
+	$userquery = sprintf("SELECT UserID FROM Users WHERE Username='%s'", mysql_real_escape_string($username));
+	$result = mysql_fetch_assoc(mysql_query($userquery));
+	$query = mysql_query(sprintf("SELECT * FROM Circles WHERE Owner='%s'",
+		mysql_real_escape_string($result['UserID'])));
+
 	?>
 <!-- -->
   	<table class="table table-striped">
 	  <thead>
 	    <tr>
 	      <th>Owner</th>
-	      <th>Message</th>
+	      <th>Name</th>
 	    </tr>
 	  </thead>
 	  <tbody>

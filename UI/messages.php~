@@ -62,18 +62,6 @@ if(!isset($_SESSION['current_user'])){
     <!-- Default panel contents -->
     <div class="panel-heading">Inbox</div>
       <!-- Table -->
-<!-- Placeholder PHP for table query 1/2    -->
-	<?php
-          $server = mysql_connect("localhost","root", "password");
-          $db =  mysql_select_db("Facebook");
-          $query = mysql_query("SELECT m.Content, us.Name Sender, ur.Name Reciever, m.TIMESTAMP
-FROM Messages m
-JOIN Users us ON us.UserID = m.Sender
-JOIN Users ur ON ur.UserID = m.Reciever
-ORDER BY TIMESTAMP DESC
-");
-	?>
-<!-- -->
   	<table class="table table-striped">
 	  <thead>
 	    <tr>
@@ -83,20 +71,40 @@ ORDER BY TIMESTAMP DESC
 	    </tr>
 	  </thead>
 	  <tbody>
-<!-- Placeholder PHP for message table query 2/2 --> 
-	    <?php
-	      while ($row = mysql_fetch_array($query)) {
-	       echo "<tr>";
-	       echo "<td>".$row[Timestamp]."</td>";
-	       echo "<td>".$row[Sender]."</td>";
-	       echo "<td>".$row[Content]."</td>";
-	       echo "</tr>";
-	      }
-	    ?>
-<!-- -->
-	  </tbody>
-	</table>
-  </div>
+<!-- Placeholder PHP for table query 1/2    -->
+	<?php
+	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	if($sql->connect_errno) {
+		printf("Connection Failed: %s\n", $mysqli->connect_error);
+		exit;
+	}
+	$stmt = $sql->prepare("SELECT m.Content, us.Name Send, ur.Name Rec, m.Timestamp
+	FROM Messages m
+	JOIN Users us ON us.UserID = m.Sender
+	JOIN Users ur ON ur.UserID = m.Reciever
+	WHERE ur.Name = ?
+	ORDER BY TIMESTAMP DESC");
+	if(!$stmt){
+		printf("Query Prep Failed: %s\n", $mysqli->error);
+		exit;
+	}
+	$senderName = mysql_real_escape_string($_SESSION['current_user']);
+	$stmt->bind_param('ss', $senderName, $senderName);
+	$stmt->execute();
+	$stmt->bind_result($content, $sender, $receiver, $time);
+	while($stmt->fetch()){
+		echo "<tr>";
+		echo "<td>".$time."</td>";
+		echo "<td>".$sender."</td>";
+		echo "<td>".$content."</td>";
+		echo "</tr>";
+	}
+	$stmt->close();
+	?>
+
+	</tbody>
+</table>
+</div>
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

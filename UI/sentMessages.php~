@@ -1,9 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script src="jquery-1.11.0.min.js"></script>
+
     <?php
+session_start();
+if(!isset($_SESSION['current_user'])){
+	header("Location: signin.html");
+}
           $server = mysql_connect("localhost","root", "password");
           $db =  mysql_select_db("Facebook");
+
 ?>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -65,45 +74,72 @@
   	<div class="panel-heading">Sent Messages</div>
 
 <div>
-<select class="form-control">
+   
+<form class="form-message" role="form" action="compose.php" method="post">
+<div class="form-group">
+      <label for="name">Select circle</label>
+      <select class="form-control" name="circle">
 	<?php
-          $query = mysql_query("select * from Circles");
+	  $username = $_SESSION['current_user'];
+$userquery = sprintf("SELECT UserID FROM Users WHERE Username='%s'", mysql_real_escape_string($username));
+	$result = mysql_fetch_assoc(mysql_query($userquery));
+	$query = mysql_query(sprintf("SELECT * FROM Circles WHERE Owner='%s'",
+		mysql_real_escape_string($result['UserID'])));
 	  while ($row = mysql_fetch_array($query)) {
 	       echo "<option>".$row[Name]."</option>";
 	      }
+
 	    ?>
 </select>
+</label>
 </div>
-<div>
-<select class="form-control">
-	<?php
-          $query = mysql_query("select * from CircleMembers");
-	  while ($row = mysql_fetch_array($query)) {
-	       echo "<option>".$row[Name]."</option>";
-	      }
-	    ?>
-</select>
+<div class="form-group">
+<button class="btn btn-lg btn-primary btn-block" type="submit" id="login_button" name="login_button">Select Person</button>
 </div>
-<div>	
-        <textarea class="form-control status-update" rows="3" placeholder="Message"></textarea>
+</form>
 </div>
   	<!-- Table -->
- <!-- Placeholder PHP for table query 1/2    
-			<?php
-          $server = mysql_connect("localhost","root", "");
-          $db =  mysql_select_db("MyDatabase",$server);
-          $query = mysql_query("select * from employees");
-      ?>
--->
   	<table class="table table-striped">
-			<thead>
-				<tr>
-					<th>Time</th>
-					<th>To</th>
-					<th>Message</th>
-				</tr>
-			</thead>
-			<tbody>
+	  <thead>
+	    <tr>
+	      <th>Time</th>
+	      <th>To</th>
+	      <th>Message</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+<!-- Placeholder PHP for table query 1/2    -->
+	<?php
+	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	if($sql->connect_errno) {
+		printf("Connection Failed: %s\n", $mysqli->connect_error);
+		exit;
+	}
+	$stmt = $sql->prepare("SELECT m.Content, us.Name Send, ur.Name Rec, m.Timestamp
+	FROM Messages m
+	JOIN Users us ON us.UserID = m.Sender
+	JOIN Users ur ON ur.UserID = m.Reciever
+	WHERE us.Name = ?
+	ORDER BY TIMESTAMP DESC");
+	if(!$stmt){
+		printf("Query Prep Failed: %s\n", $mysqli->error);
+		exit;
+	}
+	$senderName = mysql_real_escape_string($_SESSION['current_user']);
+	$stmt->bind_param('s', $senderName);
+	$stmt->execute();
+	$stmt->bind_result($content, $sender, $receiver, $time);
+	while($stmt->fetch()){
+		echo "<tr>";
+		echo "<td>".$time."</td>";
+		echo "<td>".$reciever."</td>";
+		echo "<td>".$content."</td>";
+		echo "</tr>";
+	}
+	$stmt->close();
+	?>
+
+  	
 <!-- Placeholder PHP for message table query 2/2 
 				 <?php
      	  	 while ($row = mysql_fetch_array($query)) {
