@@ -113,7 +113,7 @@ if(!isset($_SESSION['current_user'])){
 
     <div class="navbar navbar-default navbar-fixed-bottom">
       <div class="container">
-        <p class="navbar-text pull-right">Site by Daniel Beltran :P</p>
+        <p class="navbar-text pull-right">Site by Daniel, Josh, and Sam  :P</p>
       </div>
     </div>
 
