@@ -9,7 +9,7 @@ if(isset($_POST["send_button"])){
 	$username = (isset($_POST["name"]) ? $_POST["name"]:null);
 	$message = (isset($_POST["message"]) ? $_POST["message"]:null);
 	if($username != null && $message != null){
-	$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Name=?");
+	$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Username=?");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $mysqli->error);
 		exit;
@@ -21,7 +21,7 @@ if(isset($_POST["send_button"])){
 	$stmt->fetch();
 	$stmt->close();
 
-	$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Name=?");
+	$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Username=?");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $mysqli->error);
 		exit;
@@ -32,7 +32,6 @@ if(isset($_POST["send_button"])){
 	$stmt->bind_result($receiver);
 	$stmt->fetch();
 	$stmt->close();
-
 	$stmt = $sql->prepare("insert into Messages (Content, Sender, Reciever) values (?, ?, ?)");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $sql->error);
@@ -41,7 +40,7 @@ if(isset($_POST["send_button"])){
 	$stmt->bind_param('sii', mysql_real_escape_string($message), $sender, $receiver);
 	$stmt->execute();
 	$stmt->close();
-	header("Location: messages.php");
+	header("Location: sentMessages.php");
 	} 
 
 }

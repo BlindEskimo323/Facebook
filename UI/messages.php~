@@ -78,18 +78,18 @@ if(!isset($_SESSION['current_user'])){
 		printf("Connection Failed: %s\n", $mysqli->connect_error);
 		exit;
 	}
-	$stmt = $sql->prepare("SELECT m.Content, us.Name Send, ur.Name Rec, m.Timestamp
+	$stmt = $sql->prepare("SELECT m.Content, us.Username Send, ur.Username Rec, m.Timestamp
 	FROM Messages m
 	JOIN Users us ON us.UserID = m.Sender
 	JOIN Users ur ON ur.UserID = m.Reciever
-	WHERE ur.Name = ?
+	WHERE ur.Username = ?
 	ORDER BY TIMESTAMP DESC");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $mysqli->error);
 		exit;
 	}
 	$senderName = mysql_real_escape_string($_SESSION['current_user']);
-	$stmt->bind_param('ss', $senderName, $senderName);
+	$stmt->bind_param('s', $senderName);
 	$stmt->execute();
 	$stmt->bind_result($content, $sender, $receiver, $time);
 	while($stmt->fetch()){

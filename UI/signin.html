@@ -54,28 +54,26 @@
                 <h4 class="modal-title">Registration</h4>
               </div>
               <div class="modal-body">
-		<form class="sign-in" role="form" action="login.php" method="post">
+		<form class="sign-in" role="form" action="signup.php" method="post">
                  <div class="form-group">
                    <label for="signUpName">Full Name</label>
-                   <input type="text" class="form-control" id="signUpName" placeholder="Enter Full Name">
+                   <input type="text" class="form-control" id="signUpName" name="signUpName" placeholder="Enter Full Name">
                  </div>
                  <div class="form-group">
                    <label for="signUpUsername">Username</label>
-                   <input type="text" class="form-control" id="signUpUserName" placeholder="Enter username" required>
+                   <input type="text" class="form-control" id="signUpUserName" name="signUpUserName" placeholder="Enter username" required>
                  </div>
                  <div class="form-group">
 		   <label for="signUpEmail">Email address</label>
-		   <input type="email" class="form-control" id="signUpEmail" placeholder="Enter email">
+		   <input type="email" class="form-control" id="signUpEmail" name="signUpEmail" placeholder="Enter email">
 		 </div>
 		 <div class="form-group">
 		   <label for="signUpPassword">Password</label>
-		   <input type="password" class="form-control" id="signUpPassword" placeholder="Password">
+		   <input type="password" class="form-control" id="signUpPassword" name="signUpPassword" placeholder="Password">
 		 </div>
-		</form> 
-              </div>
-              <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Save changes</button>
+                <button type="submit" class="btn btn-primary" name="signupSubmit">Save changes</button>
+		</form> 
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
