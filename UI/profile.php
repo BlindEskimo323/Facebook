@@ -34,6 +34,7 @@ if(!isset($_SESSION['current_user'])){
 	$stmt->close();
 	echo ("<h1>".$name."</h1>");
         echo ("<p>".$username."</p>");
+        echo ("<p>".$email."</p>");
 ?>
 
         <!-- Button trigger modal -->
@@ -48,7 +49,7 @@ if(!isset($_SESSION['current_user'])){
                 <h4 class="modal-title">Update Profile</h4>
               </div>
               <div class="modal-body">
-                <form class="sign-in" role="form" action="updateProfile.php" method="update">
+                <form class="sign-in" role="form" action="updateProfile.php" method="POST">
 		 <div class="form-group">
 		   <label for="updateName">Full Name</label>
 		   <input type="text" class="form-control" id="updateName" name="updateName" placeholder="Enter new full name">

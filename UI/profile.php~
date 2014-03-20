@@ -36,8 +36,39 @@ if(!isset($_SESSION['current_user'])){
         echo ("<p>".$username."</p>");
 ?>
 
-        <a class="btn btn-default">Learn more</a>
-        <a href="mailto:daniel.beltran.13@ucl.ac.uk" class="btn btn-info">Contact Us</a>
+        <!-- Button trigger modal -->
+          <a data-toggle="modal" class="btn btn-primary" href="#editProfile">Edit Profle</a>
+
+<!-- Filter Modal -->
+        <div class="modal fade" id="editProfile" tabindex="-1" role="dialog" aria-labelledby="filterModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Update Profile</h4>
+              </div>
+              <div class="modal-body">
+                <form class="sign-in" role="form" action="updateProfile.php" method="POST">
+		 <div class="form-group">
+		   <label for="updateName">Full Name</label>
+		   <input type="text" class="form-control" id="updateName" name="updateName" placeholder="Enter new full name">
+		 </div>
+                 <div class="form-group">
+                   <label for="updateEmail">Email address</label>
+                   <input type="email" class="form-control" id="updateEmail" name="updateEmail" placeholder="Enter new email">
+                 </div>
+                 <div class="form-group">
+                   <label for="updatePassword">Password</label>
+                   <input type="password" class="form-control" id="updatePassword" name="updatePassword" placeholder="Enter new password">
+                 </div>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" name="updateProfileSubmit">Save changes</button>
+                </form>
+              </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div><!-- /.modal -->
+
         </center>
       </div>
     </div>
