@@ -29,6 +29,14 @@ include 'bar.html';
 			if($stmt->fetch()){
 				echo ("<h1>".$name."</h1>");
 				echo ("<p>".$username."</p>");
+
+				echo '<form role="form" action="friendsOfFriend.php" class="form-message" method="POST">';
+				echo '<div class="form-group">';
+    				echo '<input type="hidden" name="sender" value='.$username.'>';
+				echo '<button type="submit" class="btn btn-default" name="friends">Friends</button>';
+				echo '</div>';
+				echo '</form>';
+				
 			} else{
 				echo ("<h1> User not found </h1>");
 			}
