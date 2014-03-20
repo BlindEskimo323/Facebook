@@ -16,8 +16,8 @@ include 'bar.html';
   	<table class="table table-striped">
 	  <thead>
 	    <tr>
-	      <th>Name</th>
 	      <th>Username</th>
+	      <th>Name</th>
 	      <th>Since</th>
 	    </tr>
 	  </thead>

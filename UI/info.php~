@@ -18,7 +18,8 @@ include 'bar.html';
 	    <tr>
 	      <th>Name</th>
 	      <th>Username</th>
-	      <th>Since</th>
+	      <th>Time</th>
+	      <th>Status</th>
 	    </tr>
 	  </thead>
 	  <tbody>
@@ -29,31 +30,35 @@ include 'bar.html';
 		printf("Connection Failed: %s\n", $mysqli->connect_error);
 		exit;
 	}
-	$stmt = $sql->prepare("SELECT us.Username send, us.Name sendName, ur.Username Rec, ur.Name RecName, r.Timestamp
+	$stmt = $sql->prepare("SELECT us.Username send, us.Name sendName, ur.Username Rec, ur.Name RecName, r.Timestamp, r.Response
 	FROM Requests r
 	JOIN Users us ON us.UserID = r.Sender
 	JOIN Users ur ON ur.UserID = r.Reciever
-	WHERE (ur.Username = ? OR us.Username = ?) AND r.Response = 1
+	WHERE (ur.Username = ? OR us.Username = ?)
 	ORDER BY TIMESTAMP DESC");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $mysqli->error);
 		exit;
 	}
-	$senderName = mysql_real_escape_string($_POST['sender']);
-	$stmt->bind_param('ss', $senderName, $senderName);
+	$username = mysql_real_escape_string($_SESSION['current_user']);
+	$stmt->bind_param('ss', $username, $username);
 	$stmt->execute();
-	$stmt->bind_result($send, $sendName, $rec, $recName, $time);
+	$stmt->bind_result($send, $sendName, $rec, $recName, $time, $response);
 	while($stmt->fetch()){
 		echo "<tr>";
-		if(strcmp($send, $senderName) == 0){
+		if(strcmp($send, $username) == 0){
 		echo "<td>".$rec."</td>";
 		echo "<td>".$recName."</td>";
-		echo "<td>".$time."</td>";
 		} else { 
 		echo "<td>".$send."</td>";
 		echo "<td>".$sendName."</td>";
-		echo "<td>".$time."</td>";
 		}
+		echo "<td>".$time."</td>";
+		if($response){
+		echo "<td>Accepted</td>";
+		}else {
+		echo "<td>Pending</td>";
+		}	
 		echo "</tr>";
 	}
 	$stmt->close();

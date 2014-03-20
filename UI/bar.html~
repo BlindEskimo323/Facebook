@@ -41,6 +41,7 @@
 
             <li class="active"><a href="index.php">Home</a></li>
             <li><a href="profile.php">Profile</a></li>
+            <li><a href="circles.php">Circles</a></li>
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Messages <b class="caret"></b></a>
               <ul class="dropdown-menu">
