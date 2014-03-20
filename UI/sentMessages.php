@@ -23,15 +23,13 @@ include 'bar.html';
       <label for="name">Select circle</label>
       <select class="form-control" name="circle">
 	<?php
-	  $username = $_SESSION['current_user'];
-$userquery = sprintf("SELECT UserID FROM Users WHERE Username='%s'", mysql_real_escape_string($username));
-	$result = mysql_fetch_assoc(mysql_query($userquery));
-	$query = mysql_query(sprintf("SELECT * FROM Circles WHERE Owner='%s'",
-		mysql_real_escape_string($result['UserID'])));
-	  while ($row = mysql_fetch_array($query)) {
-	       echo "<option>".$row[Name]."</option>";
-	      }
-
+		$username = $_SESSION['current_user'];
+		$userquery = sprintf("SELECT UserID FROM Users WHERE Username='%s'", mysql_real_escape_string($username));
+		$result = mysql_fetch_assoc(mysql_query($userquery));
+		$query = mysql_query(sprintf("SELECT * FROM Circles WHERE Owner='%s'", mysql_real_escape_string($result['UserID'])));
+	  	while ($row = mysql_fetch_array($query)) {
+			echo "<option>".$row[Name]."</option>";
+		}
 	    ?>
 </select>
 </label>

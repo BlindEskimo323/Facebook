@@ -22,7 +22,7 @@ if(isset($_POST["addFriend"])){
 			printf("Query Prep Failed: %s\n", $sql->error);
 			exit;
 		}
-		$stmt->bind_param('ss', $sender, $receiverName);
+		$stmt->bind_param('ss', $senderName, $receiverName);
 		$stmt->execute();
 		$stmt->close();
 		header("Location: index.php");

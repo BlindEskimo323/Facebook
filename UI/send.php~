@@ -9,33 +9,13 @@ if(isset($_POST["send_button"])){
 	$username = (isset($_POST["name"]) ? $_POST["name"]:null);
 	$message = (isset($_POST["message"]) ? $_POST["message"]:null);
 	if($username != null && $message != null){
-	$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Username=?");
-	if(!$stmt){
-		printf("Query Prep Failed: %s\n", $mysqli->error);
-		exit;
-	}
 	$senderName = mysql_real_escape_string($_SESSION['current_user']);
-	$stmt->bind_param('s', $senderName);
-	$stmt->execute();
-	$stmt->bind_result($sender);
-	$stmt->fetch();
-	$stmt->close();
-
-	$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Username=?");
-	if(!$stmt){
-		printf("Query Prep Failed: %s\n", $mysqli->error);
-		exit;
-	}
 	$receiverName = mysql_real_escape_string($_POST['name']);
-	$stmt->bind_param('s', $receiverName);
-	$stmt->execute();
-	$stmt->bind_result($receiver);
-	$stmt->fetch();
-	$stmt->close();
+
 	$stmt = $sql->prepare("insert into Messages(Content, Sender, Reciever)
-    	   SELECT ?,
-           (SELECT userID FROM Users WHERE Username=?) AS Sender,
-           (SELECT userID FROM Users WHERE Username=?) AS Reciever");
+				SELECT ?,
+				(SELECT userID FROM Users WHERE Username=?) AS Sender,
+				(SELECT userID FROM Users WHERE Username=?) AS Reciever");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $sql->error);
 		exit;
