@@ -33,9 +33,50 @@ include 'bar.html';
 				echo ("<h1> User not found </h1>");
 			}
 			$stmt->close();
+			
+			$stmt = $sql->prepare("SELECT r.Response, r.Timestamp, us.Username, ur.Username
+	FROM Requests r
+	JOIN Users us ON us.UserID = r.Sender
+	JOIN Users ur ON ur.UserID = r.Reciever
+	WHERE (us.Username = ? OR us.Username = ?) AND (ur.Username = ? OR ur.Username = ?)");
+			if(!$stmt){
+				printf("Query Prep Failed: %s\n", $sql->error);
+				exit;
+			}
+			$current = mysql_real_escape_string($_SESSION['current_user']);
+			$stmt->bind_param('ssss', $username, $current, $current, $username);
+			$stmt->execute();
+			$stmt->bind_result($response, $time, $sender, $receiver);
+			if($stmt->fetch()){
+				if(!$response && strcmp($sender, $current)==0){
+					echo "<a href='#' class='btn btn-danger'>Request Already Sent</a>";
+				}
+				else if(!$response && strcmp($sender, $username)==0){
+					echo '<form role="form" action="acceptFriend.php" class="form-message" method="POST">';
+					echo '<div class="form-group">';
+    					echo '<input type="hidden" name="sender" value='.$username.'>';
+					echo '<button type="submit" class="btn btn-success" name="addFriend">Add Friend</button>';
+					echo '</div>';
+					echo '</form>';
+				}
+				else{
+					echo "<a href='#' class='btn btn-info'>Already Friends</a>";
+					echo "<p><a href='removeFriend.php' class='btn btn-danger'>Remove Friend</a></p>";
+				}
+			} else{
+				echo '<form role="form" action="addFriend.php" class="form-message" method="POST">';
+				echo '<div class="form-group">';
+    				echo '<input type="hidden" name="receiver" value='.$username.'>';
+				echo '<button type="submit" class="btn btn-success" name="addFriend">Add Friend</button>';
+				echo '</div>';
+				echo '</form>';
+
+			}
+			$stmt->close();
+			
 
 		} else{
-			header("Location: index.html");
+			header("Location: index.php");
 		}
 		?>
 

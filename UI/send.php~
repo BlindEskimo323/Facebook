@@ -32,15 +32,18 @@ if(isset($_POST["send_button"])){
 	$stmt->bind_result($receiver);
 	$stmt->fetch();
 	$stmt->close();
-	$stmt = $sql->prepare("insert into Messages (Content, Sender, Reciever) values (?, ?, ?)");
+	$stmt = $sql->prepare("insert into Messages(Content, Sender, Reciever)
+    	   SELECT ?,
+           (SELECT userID FROM Users WHERE Username=?) AS Sender,
+           (SELECT userID FROM Users WHERE Username=?) AS Reciever");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $sql->error);
 		exit;
 	}
-	$stmt->bind_param('sii', mysql_real_escape_string($message), $sender, $receiver);
+	$stmt->bind_param('sss', mysql_real_escape_string($message), $senderName, $receiverName);
 	$stmt->execute();
 	$stmt->close();
-	header("Location: messages.php");
+	header("Location: sentMessages.php");
 	} 
 
 }
