@@ -87,7 +87,7 @@
 
 			}
 			$stmt->close();
-			
+			echo $response.$sender.$username;
 
 		} else{
 			header("Location: index.php");
