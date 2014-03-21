@@ -23,5 +23,6 @@ if(isset($_POST["addCircle_Button"])){
 	header("Location: circles.php");
 
 }
+else
 header("Location: index.php");
 ?>
