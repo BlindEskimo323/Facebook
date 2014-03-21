@@ -34,6 +34,7 @@ if(!isset($_SESSION['current_user'])){
 	$stmt->close();
 	echo ("<h1>".$name."</h1>");
         echo ("<p>".$username."</p>");
+        echo ("<p>".$email."</p>");
 ?>
 
         <!-- Button trigger modal -->

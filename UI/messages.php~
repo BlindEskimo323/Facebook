@@ -21,17 +21,18 @@ include 'bar.html';
       <select class="form-control" name="circle">
 	<?php
 		$username = $_SESSION['current_user'];
-$stmt = $sql->prepare("SELECT Name FROM Circles WHERE Owner=(SELECT UserID FROM Users WHERE Username=?)");
-	if(!$stmt){
-		printf("Query Prep Failed: %s\n", $mysqli->error);
-		exit;
-	}
-	$stmt->bind_param('s', $username);
-	$stmt->execute();
-	$stmt->bind_result($name);
-	while($stmt->fetch()){
-		echo "<option>".$name."</option>";
-	}
+		$stmt = $sql->prepare("SELECT Name FROM Circles WHERE Owner=(SELECT UserID FROM Users WHERE Username=?)");
+		if(!$stmt){
+			printf("Query Prep Failed: %s\n", $mysqli->error);
+			exit;
+		}
+		$stmt->bind_param('s', $username);
+		$stmt->execute();
+		$stmt->bind_result($name);
+		while($stmt->fetch()){
+			echo "<option>".$name."</option>";
+		}
+		$stmt->close();
 	    ?>
 </select>
 </label>
