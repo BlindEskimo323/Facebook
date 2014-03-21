@@ -1,9 +1,9 @@
 <?php
 if(isset($_POST["signupSubmit"])){
 	session_start();
-	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "Facebook");
+	$sql = new mysql("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
 	if($sql->connect_errno) {
-		printf("Connection Failed: %s\n", $mysqli->connect_error);
+		printf("Connection Failed: %s\n", $sql->connect_error);
 		exit;
 	}
 
