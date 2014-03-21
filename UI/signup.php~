@@ -22,6 +22,7 @@ if(isset($_POST["signupSubmit"])){
 		$stmt->bind_result($taken);
 		$stmt->fetch();
 		$stmt->close();
+		echo $username.$name;
 		if($taken){
 			header("Location: signin.html");
 			die();
