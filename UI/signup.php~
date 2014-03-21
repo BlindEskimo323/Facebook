@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST["signupSubmit"])){
 	session_start();
-	$sql = new mysql("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "acebook");
 	if($sql->connect_errno) {
 		printf("Connection Failed: %s\n", $sql->connect_error);
 		exit;
@@ -37,7 +37,7 @@ if(isset($_POST["signupSubmit"])){
 		$stmt->close();
 	
 		$_SESSION['current_user'] = $username;
-		header("Location: index.php");
+		//header("Location: index.php");
 		die();
 		
 	} 
