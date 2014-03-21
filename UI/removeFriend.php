@@ -4,7 +4,7 @@
 		header("Location: signin.html");
 	}
 	echo $_POST['sender'];
-	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
 	if($sql->connect_errno) {
 		printf("Connection Failed: %s\n", $sql->connect_error);
 		exit;

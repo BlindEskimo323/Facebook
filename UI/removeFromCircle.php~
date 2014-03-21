@@ -12,7 +12,7 @@ if(isset($_POST["remove_button"])){
 	if($currentUser != null && $otherUser != null && $circle !=null){
 
 	$stmt = $sql->prepare(" DELETE FROM CircleMembers 
-				WHERE CircleID = (SELECT CircleID FROM Circles WHERE Name=?) AND 					UserID = (SELECT UserID FROM Users WHERE Username=?)");
+				WHERE CircleID = (SELECT CircleID FROM Circles WHERE Name=?) AND UserID = (SELECT UserID FROM Users WHERE Username=?)");
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $sql->error);
 		exit;

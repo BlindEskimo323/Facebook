@@ -1,7 +1,7 @@
 <?php
 if(isset($_POST["send_button"])){
 	session_start();
-	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
 	if($sql->connect_errno) {
 		printf("Connection Failed: %s\n", $mysqli->connect_error);
 		exit;

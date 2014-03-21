@@ -3,14 +3,12 @@ session_start();
 if(!isset($_SESSION['current_user'])){
 	header("Location: signin.html");
 }
+include 'bar.html';
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
   <body>
-<?php
-include 'bar.html';
-?>
     <div class="container">
       <div class="jumbotron">
         <center>

@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <body>
-	<?php
-include 'bar.html';
+<?php
+	include 'bar.html';
 ?>
 <div class="container">
       <div class="jumbotron">
@@ -44,10 +44,10 @@ include 'bar.html';
 			$stmt->close();
 			
 			$stmt = $sql->prepare("SELECT r.Response, r.Timestamp, us.Username, ur.Username
-	FROM Requests r
-	JOIN Users us ON us.UserID = r.Sender
-	JOIN Users ur ON ur.UserID = r.Reciever
-	WHERE (us.Username = ? OR us.Username = ?) AND (ur.Username = ? OR ur.Username = ?)");
+						FROM Requests r
+						JOIN Users us ON us.UserID = r.Sender
+						JOIN Users ur ON ur.UserID = r.Reciever
+						WHERE (us.Username = ? OR us.Username = ?) AND (ur.Username = ? OR ur.Username = ?)");
 			if(!$stmt){
 				printf("Query Prep Failed: %s\n", $sql->error);
 				exit;

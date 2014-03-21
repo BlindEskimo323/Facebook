@@ -6,8 +6,9 @@ session_start();
 if(!isset($_SESSION['current_user'])){
 	header("Location: signin.html");
 }
-          $server = mysql_connect("localhost","root", "password");
-          $db =  mysql_select_db("Facebook");
+
+          $server = mysql_connect("eu-cdbr-azure-west-b.cloudapp.net","bab5e35687adc1", "08b0d06f");
+          $db =  mysql_select_db("facebook");
 
 ?>
   </head>

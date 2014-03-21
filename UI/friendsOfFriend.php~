@@ -16,15 +16,15 @@ include 'bar.html';
   	<table class="table table-striped">
 	  <thead>
 	    <tr>
-	      <th>Name</th>
 	      <th>Username</th>
+	      <th>Name</th>
 	      <th>Since</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 <!-- Placeholder PHP for table query 1/2    -->
 	<?php
-	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
 	if($sql->connect_errno) {
 		printf("Connection Failed: %s\n", $mysqli->connect_error);
 		exit;

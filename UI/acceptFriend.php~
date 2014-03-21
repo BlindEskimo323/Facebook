@@ -2,9 +2,10 @@
 if(isset($_POST["acceptFriend"])){
 	session_start();
 
-	$sql = new mysqli("localhost", "root", "password", "Facebook");
-	if($sql === false){
-	    die(print_r(sqlsrv_errors()));
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
+	if($sql->connect_errno) {
+		printf("Connection Failed: %s\n", $mysqli->connect_error);
+		exit;
 	}
 
 	$sender = (isset($_POST["sender"]) ? $_POST["sender"]:null);

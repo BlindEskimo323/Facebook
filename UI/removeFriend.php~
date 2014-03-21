@@ -10,7 +10,7 @@
 		exit;
 	}
 	echo $_POST['sender'];
-	$stmt = $sql->prepare("DELETE FROM Requests WHERE (Sender = ? OR Sender = ?) AND ( Reciever=? OR Reciever=?) AND Response=1");
+	$stmt = $sql->prepare("DELETE FROM Requests WHERE (Sender = (SELECT UserID FROM Users WHERE Username=?) OR Sender = (SELECT UserID FROM Users WHERE Username=?)) AND ( Reciever=(SELECT UserID FROM Users WHERE Username=?) OR Reciever=(SELECT UserID FROM Users WHERE Username=?)) AND Response=1");
 	echo $_POST['sender'];
 	if(!$stmt){
 		printf("Query Prep Failed: %s\n", $mysqli->error);

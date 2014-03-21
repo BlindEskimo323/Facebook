@@ -6,8 +6,11 @@ session_start();
 if(!isset($_SESSION['current_user'])){
 	header("Location: signin.html");
 }
-          $server = mysql_connect("localhost","root", "password");
-          $db =  mysql_select_db("Facebook");
+	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	if($sql->connect_errno) {
+		printf("Connection Failed: %s\n", $mysqli->connect_error);
+		exit;
+	}
 include 'bar.html';
 
 ?>
@@ -54,11 +57,6 @@ include 'bar.html';
 	  <tbody>
 <!-- Placeholder PHP for table query 1/2    -->
 	<?php
-	$sql = new mysqli("localhost", "root", "password", "Facebook");
-	if($sql->connect_errno) {
-		printf("Connection Failed: %s\n", $mysqli->connect_error);
-		exit;
-	}
 	$stmt = $sql->prepare("SELECT m.Content, us.Username Send, ur.Username Rec, m.Timestamp
 	FROM Messages m
 	JOIN Users us ON us.UserID = m.Sender

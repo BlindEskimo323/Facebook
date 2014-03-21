@@ -22,23 +22,23 @@ if(isset($_POST["signupSubmit"])){
 		$stmt->bind_result($taken);
 		$stmt->fetch();
 		$stmt->close();
-		echo $username.$name;
 		if($taken){
 			header("Location: signin.html");
 			die();
-		}	
+		}
 
-		$stmt = $sql->prepare("insert into Users (Name, Username, Password, Email) values (?, ?, ?, ?)");
+		$stmt = $sql->prepare("insert into Users (Name, Username, Password, email) values (?, ?, ?, ?)");
 		if(!$stmt){
 			printf("Query Prep Failed: %s\n", $sql->error);
 			exit;
 		}
+		echo $username.$name.$password.$email; 
 		$stmt->bind_param('ssss', mysql_real_escape_string($name), mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($email));
 		$stmt->execute();
 		$stmt->close();
 	
 		$_SESSION['current_user'] = $username;
-		//header("Location: index.php");
+		header("Location: index.php");
 		die();
 		
 	} 

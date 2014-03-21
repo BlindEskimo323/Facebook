@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 	<?php
 		session_start();
 		if(!isset($_SESSION['current_user'])){
@@ -8,15 +8,15 @@
 		}
 		$circle = (isset($_POST["circle"]) ? $_POST["circle"]:null);
 
-		$sql = new mysqli("localhost", "root", "password", "Facebook");
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
 		if($sql->connect_errno) {
 			printf("Connection Failed: %s\n", $mysqli->connect_error);
 			exit;
 		}
+		include 'bar.html';
 	?>
-  </head>
-  <body>
-	<?php include 'bar.html'; ?>
+</head>
+<body>
 <form class="form-message" role="form" action="addToCircle.php" method="post">
 <div class="form-group">
       <label for="name">Select person</label>

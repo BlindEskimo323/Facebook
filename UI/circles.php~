@@ -16,7 +16,7 @@ include 'bar.html';
       <label for="name">Circles</label>
       <select class="form-control" name="circle">
 	<?php
-		$sql = new mysqli("localhost", "root", "password", "Facebook");
+	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
 		if($sql->connect_errno) {
 			printf("Connection Failed: %s\n", $mysqli->connect_error);
 			exit;
