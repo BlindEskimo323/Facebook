@@ -31,5 +31,6 @@ if(isset($_POST["login_button"])){
 	} 
 
 }
+else
 header("Location: index.php");
 ?>

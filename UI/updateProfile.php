@@ -38,5 +38,6 @@ if(isset($_POST["updateProfileSubmit"])){
 
         }
 }
+else
 header("Location: index.php");
 ?>

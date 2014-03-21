@@ -32,7 +32,6 @@ if(isset($_POST["signupSubmit"])){
 			printf("Query Prep Failed: %s\n", $sql->error);
 			exit;
 		}
-		echo $username.$name.$password.$email; 
 		$stmt->bind_param('ssss', mysql_real_escape_string($name), mysql_real_escape_string($username), mysql_real_escape_string($password), mysql_real_escape_string($email));
 		$stmt->execute();
 		$stmt->close();

@@ -43,5 +43,6 @@ if(isset($_POST["signupSubmit"])){
 	} 
 
 }
+else
 header("Location: index.php");
 ?>
