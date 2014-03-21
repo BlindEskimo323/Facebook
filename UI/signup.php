@@ -12,7 +12,7 @@ if(isset($_POST["signupSubmit"])){
 	$username = (isset($_POST["signUpUserName"]) ? $_POST["signUpUserName"]:null);
 	$password = (isset($_POST["signUpPassword"]) ? hash('sha256', $_POST["signUpPassword"]):null);
 	if($username != null && $password != null && $email != null && $name != null){
-		$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Username=?");
+/*		$stmt = $sql->prepare("SELECT UserID FROM Users WHERE Username=?");
 		if(!$stmt){
 			printf("Query Prep Failed: %s\n", $sql->error);
 			exit;
@@ -22,13 +22,13 @@ if(isset($_POST["signupSubmit"])){
 		$stmt->bind_result($taken);
 		$stmt->fetch();
 		$stmt->close();
-		echo $username.$name;
+		echo $username.$name; 
 		if($taken){
 			header("Location: signin.html");
 			die();
-		}	
+		}	*/
 
-		$stmt = $sql->prepare("insert into Users (Name, Username, Password, Email) values (?, ?, ?, ?)");
+		$stmt = $sql->prepare("insert into Users (Name, Username, Password, email) values (?, ?, ?, ?)");
 		if(!$stmt){
 			printf("Query Prep Failed: %s\n", $sql->error);
 			exit;
