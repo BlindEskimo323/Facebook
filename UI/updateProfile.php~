@@ -29,7 +29,7 @@ if(isset($_POST["updateProfileSubmit"])){
 		        printf("Query Prep Failed: %s\n", $sql->error);
 		        exit;
 		}
-		$stmt->bind_param('ss', mysql_real_escape_string($name),mysql_real_escape_string($email),mysql_real_escape_string($password), $username);
+		$stmt->bind_param('ssss', mysql_real_escape_string($name),mysql_real_escape_string($email),mysql_real_escape_string($password), $username);
 		$stmt->execute();
 		$stmt->close();
 

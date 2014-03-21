@@ -43,4 +43,5 @@ if(isset($_POST["signupSubmit"])){
 	} 
 
 }
+header("Location: index.php");
 ?>

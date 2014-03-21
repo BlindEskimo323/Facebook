@@ -15,9 +15,9 @@ if(isset($_POST["acceptFriend"])){
 		$receiver = mysql_real_escape_string($_SESSION['current_user']);
 		$receiverName = mysql_real_escape_string($receiver);
 
-		$stmt = $sql->prepare("UPDATE Requests SET Response=1 WHERE sender=
-			SELECT userID FROM Users WHERE Username=?) and 
-			Reciever = SELECT userID FROM Users WHERE Username=?");
+		$stmt = $sql->prepare("UPDATE Requests SET Response=1 WHERE 
+			sender= (SELECT userID FROM Users WHERE Username=?) and 
+			Reciever = (SELECT userID FROM Users WHERE Username=?)");
 		if(!$stmt){
 			printf("Query Prep Failed: %s\n", $sql->error);
 			exit;
@@ -29,4 +29,5 @@ if(isset($_POST["acceptFriend"])){
 	} 
 
 }
+header("Location: index.html");
 ?>

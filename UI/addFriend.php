@@ -29,4 +29,5 @@ if(isset($_POST["addFriend"])){
 	} 
 	header("Location: index.php");
 }
+header("Location: index.php");
 ?>

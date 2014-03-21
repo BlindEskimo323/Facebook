@@ -8,10 +8,10 @@
 		}
 	        $server = mysql_connect("localhost","root", "password");
 	        $db =  mysql_select_db("Facebook");
+		include 'bar.html';
 	?>
   </head>
   <body>
-	<?php include 'bar.html'; ?>
 <form class="form-message" role="form" action="send.php" method="post">
 <div class="form-group">
       <label for="name">Select person</label>
@@ -36,9 +36,7 @@
 <div>
 <button class="btn btn-lg btn-primary btn-block" type="submit" id="send_button" name="send_button">Send</button>
 </div>
-	</div>
-
-
-  </body>
+</div>
+</body>
 </html>
 

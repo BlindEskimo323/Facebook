@@ -20,6 +20,8 @@ if(isset($_POST["addCircle_Button"])){
 	$stmt->close();
 	header("Location: circles.php");
 	} 
+	header("Location: circles.php");
 
 }
+header("Location: index.html");
 ?>

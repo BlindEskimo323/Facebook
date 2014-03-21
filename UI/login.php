@@ -21,4 +21,5 @@ if(isset($_POST["login_button"])){
 	} 
 
 }
+header("Location: index.php");
 ?>

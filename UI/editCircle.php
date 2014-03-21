@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
 	<?php
 		session_start();
 		if(!isset($_SESSION['current_user'])){
@@ -13,10 +13,10 @@
 			printf("Connection Failed: %s\n", $mysqli->connect_error);
 			exit;
 		}
+		include 'bar.html';
 	?>
-  </head>
-  <body>
-	<?php include 'bar.html'; ?>
+</head>
+<body>
 <form class="form-message" role="form" action="addToCircle.php" method="post">
 <div class="form-group">
       <label for="name">Select person</label>

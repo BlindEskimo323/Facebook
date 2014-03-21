@@ -66,7 +66,7 @@ WHERE (us.Username = ?
       <label for="name">Select person</label>
       <select class="form-control" name="personToRemove">
 	<?php
-		$stmt = $sql->prepare("SELECT us.Username FROM CircleMembers c Join Users us ON us.UserID = c.UserID WHERE CircleID=(SELECT CircleID FROM Circles WHERE Name=?) ORDER BY us.Username");
+		$stmt = $sql->prepare("SELECT us.Username FROM CircleMembers c Join Users us ON us.UserID = c.UserID WHERE CircleID=(SELECT CircleID FROM Circles WHERE Name=?)");
 		if(!$stmt){
 			printf("Query Prep Failed: %s\n", $mysqli->error);
 			exit;

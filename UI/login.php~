@@ -4,7 +4,7 @@ if(isset($_POST["login_button"])){
 	mysql_connect("localhost", "root", "password");
 	mysql_select_db("Facebook");
 	$username = (isset($_POST["contact-uname"]) ? $_POST["contact-uname"]:null);
-	$password = (isset($_POST["contact-pwd"]) ? $_POST["contact-pwd"]:null);
+	$password = (isset($_POST["contact-pwd"]) ? hash('sha256', $_POST["contact-pwd"]):null);
 	if($username != null && $password != null){
 		$query = sprintf("SELECT Username, Password FROM Users WHERE Username='%s'",
 		mysql_real_escape_string($username));

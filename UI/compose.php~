@@ -22,7 +22,7 @@ include 'bar.html';
       <select class="form-control" name="name">
 	<?php
 	$circle = (isset($_POST["circle"]) ? $_POST["circle"]:null);
-		$userquery = sprintf("SELECT CircleID FROM Circles WHERE Username='%s'", mysql_real_escape_string($circle));
+		$userquery = sprintf("SELECT CircleID FROM Circles WHERE Name='%s'", mysql_real_escape_string($circle));
 		$result = mysql_fetch_assoc(mysql_query($userquery));
 		$query = mysql_query(sprintf("SELECT us.Username FROM CircleMembers c Join Users us ON us.UserID = c.UserID WHERE CircleID='%s'",mysql_real_escape_string($result['CircleID'])));
 	 	while ($row = mysql_fetch_array($query)) {

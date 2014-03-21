@@ -24,8 +24,8 @@ if(isset($_POST["send_button"])){
 	$stmt->execute();
 	$stmt->close();
 	header("Location: sentMessages.php");
-	} 
-	header("Location: sentMessages.php");
+	}
 
 }
+header("Location: index.php");
 ?>

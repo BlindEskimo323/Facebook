@@ -70,7 +70,12 @@ include 'bar.html';
 				}
 				else{
 					echo "<a href='#' class='btn btn-info'>Already Friends</a>";
-					echo "<p><a href='removeFriend.php' class='btn btn-danger'>Remove Friend</a></p>";
+					echo '<form role="form" action="removeFriend.php" class="form-message" method="POST">';
+					echo '<div class="form-group">';
+    					echo '<input type="hidden" name="sender" value='.$username.'>';
+					echo '<button type="submit" class="btn btn-danger" name="acceptFriend">Remove Friend</button>';
+					echo '</div>';
+					echo '</form>';
 				}
 			} else{
 				echo '<form role="form" action="addFriend.php" class="form-message" method="POST">';
