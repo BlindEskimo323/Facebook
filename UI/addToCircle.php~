@@ -22,7 +22,6 @@ if(isset($_POST["add_button"])){
 	$stmt->bind_param('ss', mysql_real_escape_string($circle), mysql_real_escape_string($otherUser));
 	$stmt->execute();
 	$stmt->close();
-	echo $circle.$otherUser;
 	header("Location: circles.php");
 	} 
 

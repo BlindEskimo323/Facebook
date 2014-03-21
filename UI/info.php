@@ -25,7 +25,7 @@ include 'bar.html';
 	  <tbody>
 <!-- Placeholder PHP for table query 1/2    -->
 	<?php
-	$sql = new mysqli("eu-cdbr-azure-west-b.cloudapp.net", "bab5e35687adc1", "08b0d06f", "facebook");
+	$sql = new mysqli("localhost", "root", "password", "Facebook");
 	if($sql->connect_errno) {
 		printf("Connection Failed: %s\n", $mysqli->connect_error);
 		exit;

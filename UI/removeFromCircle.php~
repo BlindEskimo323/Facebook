@@ -22,7 +22,6 @@ if(isset($_POST["remove_button"])){
 	$stmt->close();
 	header("Location: circles.php");
 	} 
-	header("Location: circles.php");
 }
 else
 header("Location: index.php");

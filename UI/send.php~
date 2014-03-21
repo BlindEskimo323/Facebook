@@ -27,5 +27,6 @@ if(isset($_POST["send_button"])){
 	}
 
 }
+else
 header("Location: index.php");
 ?>
