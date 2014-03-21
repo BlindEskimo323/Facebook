@@ -3,9 +3,8 @@ if(isset($_POST["acceptFriend"])){
 	session_start();
 
 	$sql = new mysqli("localhost", "root", "password", "Facebook");
-	if($sql->connect_errno) {
-		printf("Connection Failed: %s\n", $mysqli->connect_error);
-		exit;
+	if($sql === false){
+	    die(print_r(sqlsrv_errors()));
 	}
 
 	$sender = (isset($_POST["sender"]) ? $_POST["sender"]:null);
@@ -29,5 +28,5 @@ if(isset($_POST["acceptFriend"])){
 	} 
 
 }
-header("Location: index.html");
+header("Location: index.php");
 ?>
