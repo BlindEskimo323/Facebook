@@ -1,5 +1,4 @@
 <?php
-	echo"HI";
 if(isset($_POST["updateProfileSubmit"])){
         session_start();
         $sql = new mysqli("localhost", "root", "password", "Facebook");
@@ -24,14 +23,13 @@ if(isset($_POST["updateProfileSubmit"])){
 
 		$name = (isset($_POST["updateName"]) ? $_POST["updateName"]:$name);
 		$email = (isset($_POST["updateEmail"]) ? $_POST["updateEmail"]:$email);
-		$password = ($_POST["updatePassword"]!=null ? $_POST["updatePassword"]:$password);
-		echo $name.$password.$email;
-		$stmt = $sql->prepare("UPDATE Users SET Name=? WHERE Username=?");
+		$password = ($_POST["updatePassword"]!=null ? hash('sha256', $_POST["updatePassword"]):$password);
+		$stmt = $sql->prepare("UPDATE Users SET Name=?, email=?, Password=? WHERE Username=?");
 		if(!$stmt){
 		        printf("Query Prep Failed: %s\n", $sql->error);
 		        exit;
 		}
-		$stmt->bind_param('ss', mysql_real_escape_string($name), $username);
+		$stmt->bind_param('ssss', mysql_real_escape_string($name),mysql_real_escape_string($email),mysql_real_escape_string($password), $username);
 		$stmt->execute();
 		$stmt->close();
 
@@ -39,6 +37,5 @@ if(isset($_POST["updateProfileSubmit"])){
 		die();
 
         }
-	echo "TEST";
 }
 ?>
