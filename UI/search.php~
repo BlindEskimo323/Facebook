@@ -29,7 +29,7 @@ include 'bar.html';
 			if($stmt->fetch()){
 				echo ("<h1>".$name."</h1>");
 				echo ("<p>".$username."</p>");
-        			echo ("<p>".$username."</p>");
+        			echo ("<p>".$email."</p>");
 
 				echo '<form role="form" action="friendsOfFriend.php" class="form-message" method="POST">';
 				echo '<div class="form-group">';
