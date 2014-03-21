@@ -6,17 +6,17 @@ session_start();
 if(!isset($_SESSION['current_user'])){
 	header("Location: signin.html");
 }
-          $server = mysql_connect("localhost","root", "password");
-          $db =  mysql_select_db("Facebook");
+	$sql = new mysqli("localhost", "root", "password", "Facebook");
+	if($sql->connect_errno) {
+		printf("Connection Failed: %s\n", $mysqli->connect_error);
+		exit;
+	}
+include 'bar.html';
 
 ?>
   </head>
 
   <body>
-	<?php
-include 'bar.html';
-?>
-  
    
 <form class="form-message" role="form" action="compose.php" method="post">
 <div class="form-group">
@@ -24,12 +24,18 @@ include 'bar.html';
       <select class="form-control" name="circle">
 	<?php
 		$username = $_SESSION['current_user'];
-		$userquery = sprintf("SELECT UserID FROM Users WHERE Username='%s'", mysql_real_escape_string($username));
-		$result = mysql_fetch_assoc(mysql_query($userquery));
-		$query = mysql_query(sprintf("SELECT * FROM Circles WHERE Owner='%s'", mysql_real_escape_string($result['UserID'])));
-	  	while ($row = mysql_fetch_array($query)) {
-			echo "<option>".$row[Name]."</option>";
+		$stmt = $sql->prepare("SELECT Name FROM Circles WHERE Owner=(SELECT UserID FROM Users WHERE Username=?)");
+		if(!$stmt){
+			printf("Query Prep Failed: %s\n", $mysqli->error);
+			exit;
 		}
+		$stmt->bind_param('s', $username);
+		$stmt->execute();
+		$stmt->bind_result($name);
+		while($stmt->fetch()){
+			echo "<option>".$name."</option>";
+		}
+		$stmt->close();
 	    ?>
 </select>
 </label>
@@ -51,11 +57,6 @@ include 'bar.html';
 	  <tbody>
 <!-- Placeholder PHP for table query 1/2    -->
 	<?php
-	$sql = new mysqli("localhost", "root", "password", "Facebook");
-	if($sql->connect_errno) {
-		printf("Connection Failed: %s\n", $mysqli->connect_error);
-		exit;
-	}
 	$stmt = $sql->prepare("SELECT m.Content, us.Username Send, ur.Username Rec, m.Timestamp
 	FROM Messages m
 	JOIN Users us ON us.UserID = m.Sender
