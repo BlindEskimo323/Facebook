@@ -14,11 +14,9 @@ if(isset($_POST["addCircle_Button"])){
 		printf("Query Prep Failed: %s\n", $sql->error);
 		exit;
 	}
-	echo $currentUser.$circle;
 	$stmt->bind_param('ss', mysql_real_escape_string($circle),mysql_real_escape_string($currentUser));
 	$stmt->execute();
 	$stmt->close();
-	header("Location: circles.php");
 	} 
 	header("Location: circles.php");
 

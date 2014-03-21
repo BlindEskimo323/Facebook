@@ -18,10 +18,10 @@ if(isset($_POST["addCircle_Button"])){
 	$stmt->bind_param('ss', mysql_real_escape_string($circle),mysql_real_escape_string($currentUser));
 	$stmt->execute();
 	$stmt->close();
-	header("Location: circles.php");
 	} 
 	header("Location: circles.php");
 
 }
+else
 header("Location: index.php");
 ?>
