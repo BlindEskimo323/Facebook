@@ -2,19 +2,7 @@
 if(isset($_POST["login_button"])){
 	session_start();
 
-	$host = "du7n801d1x.database.windows.net,1433";
-	$user = "user";
-	$pwd = "Abcd1234";
-	$db = "Facebook";
-	// Connect to database.
-	try {
-	    $sql = new PDO( "sqlsrv:Server= $host ; Database = $db ", $user, $pwd);
-	    $sql->setAttribute( PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION );
-	}
-	catch(Exception $e){
-	    die(var_dump($e));
-	}
-	
+
 	$sql = new mysqli("localhost", "root", "password", "Facebook");
 	if($sql->connect_errno) {
 		printf("Connection Failed: %s\n", $sql->connect_error);
